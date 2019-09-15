@@ -12,8 +12,10 @@
             <ColumnDefinition Width="50*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80*"></RowDefinition>
-            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="70*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
         <Image
             x:Name="imgBefore"
@@ -22,14 +24,60 @@
             Margin="10, 10, 0, 0"
             Grid.Column="0"
             Grid.Row="0"></Image>
+        <Image
+            x:Name="imgAfter"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="10, 10, 0, 0"
+            Grid.Column="1"
+            Grid.Row="0"></Image>
+        <Slider x:Name="sliderHue" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="10, 10, 10, 10"
+                Value="0" 
+                Minimum="0" 
+                Maximum="360"
+                Width="350"
+                ValueChanged="SliderHue_ValueChanged"/>
+        <Slider x:Name="sliderSat" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="10, 10, 10, 10"
+                Value="0" 
+                Minimum="0" 
+                Maximum="100"
+                Width="350"
+                ValueChanged="SliderSat_ValueChanged"/>
+        <Slider x:Name="sliderVal" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Value="0" 
+                Minimum="0" 
+                Maximum="100"
+                Width="350"
+                ValueChanged="SliderVal_ValueChanged"/>
         <Button x:Name="button" 
                 Content="Загрузить изображение" 
                 HorizontalAlignment="Right" 
-                Margin="0, 0, 0, 20"
+                Margin="0, 0, 20, 20"
                 VerticalAlignment="Bottom" 
-                Click="convert"
+                Click="uploadImg"
                 Grid.Column="0"
-                Grid.Row="1"/>
-
+                Grid.Row="3"/>
+        <Button x:Name="button2"
+                Content="Преобразовать"
+                Grid.Row="3"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="20, 0, 0, 20"
+                Click="convertImg"></Button>
     </Grid>
 </Window>
