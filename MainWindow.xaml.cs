@@ -25,9 +25,9 @@ namespace ComputerGraphics_2_3
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int hueOffset;
-        private int satOffset;
-        private int valOffset;
+        private int hueOffset = 0;
+        private int satOffset = 0;
+        private int valOffset = 0;
 
         private BitmapImage img;
         private Bitmap processedImage;
@@ -54,8 +54,6 @@ namespace ComputerGraphics_2_3
         private void convertImg(object sender, RoutedEventArgs e)
         {
             processedImage = BitmapImage2Bitmap(img);
-            System.Drawing.Color black = System.Drawing.Color.FromArgb(255, 0, 0, 0);
-            System.Drawing.Color white = System.Drawing.Color.FromArgb(255, 255, 255, 255);
             for (int i = 0; i < processedImage.Width; i++)
             {
                 for (int j = 0; j < processedImage.Height; j++)
@@ -90,6 +88,10 @@ namespace ComputerGraphics_2_3
                     }
                     S = (int)((MAX == 0 ? 1 : (1 - MIN / MAX)) * 100);
                     V = (int)(MAX * 100);
+
+                    H = (hueOffset + H < 0 ? 0 : hueOffset + H) % 361;
+                    S = satOffset + S < 0 ? 0 : (satOffset + S > 100 ? 100 : satOffset + S);
+                    V = valOffset + V < 0 ? 0 : (valOffset + V > 100 ? 100 : valOffset + V);
 
                     double Vmin = (100 - S) * V / 100;
                     double a = (V - Vmin) * (H % 60) / 60;
@@ -142,7 +144,7 @@ namespace ComputerGraphics_2_3
                 }
             }
             imgAfter.Source = ToBitmapImage(processedImage);
-
+            saveToFile(processedImage);
         }
 
         private int procToValue(double val)
@@ -152,17 +154,17 @@ namespace ComputerGraphics_2_3
 
         private void SliderHue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            hueOffset = (int)e.NewValue;
+            hueOffset = (int)e.NewValue - 180;
         }
 
         private void SliderSat_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            satOffset = (int)e.NewValue;
+            satOffset = (int)e.NewValue - 50;
         }
 
         private void SliderVal_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            valOffset = (int)e.NewValue;
+            valOffset = (int)e.NewValue - 50;
         }
 
         private Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
@@ -195,5 +197,22 @@ namespace ComputerGraphics_2_3
             }
         }
 
+        private void saveToFile(Bitmap bmp)
+        {
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Document";
+            dlg.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
+            if (dlg.ShowDialog() == true)
+            {
+                var encoder = new JpegBitmapEncoder(); // Or PngBitmapEncoder, or whichever encoder you want
+                encoder.Frames.Add(BitmapFrame.Create(ToBitmapImage(bmp)));
+                using (var stream = dlg.OpenFile())
+                {
+                    encoder.Save(stream);
+                }
+            }
+        }
+
+                
     }
 }
