@@ -144,7 +144,6 @@ namespace ComputerGraphics_2_3
                 }
             }
             imgAfter.Source = ToBitmapImage(processedImage);
-            saveToFile(processedImage);
         }
 
         private int procToValue(double val)
@@ -197,7 +196,7 @@ namespace ComputerGraphics_2_3
             }
         }
 
-        private void saveToFile(Bitmap bmp)
+        private void saveToFile(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
             dlg.FileName = "Document";
@@ -205,7 +204,7 @@ namespace ComputerGraphics_2_3
             if (dlg.ShowDialog() == true)
             {
                 var encoder = new JpegBitmapEncoder(); // Or PngBitmapEncoder, or whichever encoder you want
-                encoder.Frames.Add(BitmapFrame.Create(ToBitmapImage(bmp)));
+                encoder.Frames.Add(BitmapFrame.Create(ToBitmapImage(processedImage)));
                 using (var stream = dlg.OpenFile())
                 {
                     encoder.Save(stream);

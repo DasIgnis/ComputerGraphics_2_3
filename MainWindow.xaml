@@ -31,6 +31,10 @@
             Margin="10, 10, 0, 0"
             Grid.Column="1"
             Grid.Row="0"></Image>
+        <Label
+            Content="HUE"
+            Grid.Column="0"
+            Grid.Row="1"></Label>
         <Slider x:Name="sliderHue" 
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top"
@@ -42,6 +46,10 @@
                 Maximum="360"
                 Width="350"
                 ValueChanged="SliderHue_ValueChanged"/>
+        <Label
+            Content="SAT"
+            Grid.Column="1"
+            Grid.Row="1"></Label>
         <Slider x:Name="sliderSat" 
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top"
@@ -53,6 +61,11 @@
                 Maximum="100"
                 Width="350"
                 ValueChanged="SliderSat_ValueChanged"/>
+        <Label
+            Content="VAL"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Margin="200, 0, 0, 0"></Label>
         <Slider x:Name="sliderVal" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"
@@ -65,8 +78,8 @@
                 ValueChanged="SliderVal_ValueChanged"/>
         <Button x:Name="button" 
                 Content="Загрузить изображение" 
-                HorizontalAlignment="Right" 
-                Margin="0, 0, 20, 20"
+                HorizontalAlignment="Left" 
+                Margin="50, 0, 20, 20"
                 VerticalAlignment="Bottom" 
                 Click="uploadImg"
                 Grid.Column="0"
@@ -74,10 +87,19 @@
         <Button x:Name="button2"
                 Content="Преобразовать"
                 Grid.Row="3"
+                Grid.ColumnSpan="2"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                Margin="20, 0, 0, 20"
+                Click="convertImg"/>
+        <Button x:Name="button3"
+                Content="Сохранить"
+                Grid.Row="3"
                 Grid.Column="1"
                 VerticalAlignment="Bottom"
-                HorizontalAlignment="Left"
-                Margin="20, 0, 0, 20"
-                Click="convertImg"></Button>
+                HorizontalAlignment="Right"
+                Margin="50, 0, 50, 20"
+                Click="saveToFile"/>
+
     </Grid>
 </Window>
