@@ -89,7 +89,7 @@ namespace ComputerGraphics_2_3
                     S = (int)((MAX == 0 ? 1 : (1 - MIN / MAX)) * 100);
                     V = (int)(MAX * 100);
 
-                    H = (hueOffset + H < 0 ? 0 : hueOffset + H) % 361;
+                    H = (hueOffset + H) % 361;
                     S = satOffset + S < 0 ? 0 : (satOffset + S > 100 ? 100 : satOffset + S);
                     V = valOffset + V < 0 ? 0 : (valOffset + V > 100 ? 100 : valOffset + V);
 
@@ -153,7 +153,7 @@ namespace ComputerGraphics_2_3
 
         private void SliderHue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            hueOffset = (int)e.NewValue - 180;
+            hueOffset = (int)e.NewValue;
         }
 
         private void SliderSat_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

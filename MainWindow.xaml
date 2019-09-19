@@ -41,7 +41,7 @@
                 Grid.Column="0"
                 Grid.Row="1"
                 Margin="10, 10, 10, 10"
-                Value="180" 
+                Value="0" 
                 Minimum="0" 
                 Maximum="360"
                 Width="350"
